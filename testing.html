@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <input type="file" name="" id="fileId" onchange="imageUploaded()">
+    <input type="file" name="" id="fileId" onchange="imageUploaded(this.value)">
     <br><br>
 
     <button onclick="displayString()">
@@ -14,12 +14,13 @@
     <script>
         let base64String = "";
 
-        function imageUploaded() {
+        function imageUploaded(path) {
+            var newpath = path.replace(/^C:\\fakepath\\/, "")
             var file = document.querySelector(
                 'input[type=file]')['files'][0];
 
             var reader = new FileReader();
-            // console.log("next");
+            console.log("next");
 
             reader.onload = function () {
                 base64String = reader.result.replace("data:", "")
@@ -27,14 +28,15 @@
 
                 imageBase64Stringsep = base64String;
 
-                // alert(imageBase64Stringsep);
-                // console.log(base64String);
+                alert(imageBase64Stringsep);
+                console.log(base64String);
+                console.log(newpath)
             }
             reader.readAsDataURL(file);
         }
 
         function displayString() {
-            // console.log("Base64String about to be printed");
+            console.log("Base64String about to be printed");
             alert(base64String);
         }
     </script>
