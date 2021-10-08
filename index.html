@@ -15,9 +15,10 @@
         }
 
         #display-box {
+            word-wrap: break-word;
             padding: 1rem;
             width: 80%;
-            height: 8rem;
+            height: 20rem;
             border: 2px solid rgb(28, 124, 124);
             margin: 2rem 0rem;
         }
@@ -61,7 +62,7 @@
         </label>
 
         <input id="inputfile" class="button" type="file" style="display: none; visibility: none;"
-            onchange="getImage(this.value);" />
+            onchange="getImage(this.value); imageUploaded();" />
 
         <div id="display-image"></div>
     </div>
@@ -85,7 +86,6 @@
                     .replace(/^.+,/, "");
                 imageBase64Stringsep = base64String;
             }
-
             reader.readAsDataURL(file);
         }
         function invoice() {
@@ -95,7 +95,7 @@
             if (inputinvoice == "" && inputfile == "") {
                 document.getElementById("display-box").innerHTML = "No input detected.<br/>Please input either an invoice number or an image.";
             } else if (inputinvoice == "") {
-                document.getElementById("display-box").innerHTML = "Image " + path + " has been uploaded.<br/><br/>" + base64String;
+                document.getElementById("display-box").innerHTML = "Image " + path + " has been uploaded.<br/><br/>Base64String image" + base64String;
             } else if (inputfile == "") {
                 document.getElementById("display-box").innerHTML = "Invoice number : " + inputinvoice;
                 document.getElementById("inputinvoice").value;
@@ -107,7 +107,6 @@
 
     <script>
         let base64String = "";
-
         function imageUploaded() {
             var file = document.querySelector(
                 'input[type=file]')['files'][0];
